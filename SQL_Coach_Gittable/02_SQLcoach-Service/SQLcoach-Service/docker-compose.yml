@@ -1,0 +1,23 @@
+# build postgres and tomcat images
+version: '3.1'
+
+services:
+
+  sqlcoachservice-db:
+    build:
+      context: .
+      dockerfile: docker_postgres/Dockerfile
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: test
+    ports:
+      - 8002:5432
+
+  sqlcoachservice-app:
+    build:
+      context: .
+      dockerfile: docker_tomcat/Dockerfile
+    ports:
+      - 8001:8080
+    depends_on:
+      - sqlcoachservice-db
