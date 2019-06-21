@@ -57,13 +57,41 @@ public class CatalogResource {
         }
 
     }
-
+    //Get-Befehle für Szenario, Aufgabengruppe und Aufgabe
     @Path("/catalog")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Scenario> getScenarios() {
         return (sqlCoachDBFacet.getScenarios());
     }
+
+    @GET
+    @Path("catalog/{scenarioId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Group> getGroups(@PathParam("scenarioId") int scenarioId) {
+        return (sqlCoachDBFacet.getGroups(scenarioId));
+    }
+    @GET
+    @Path("catalog{scenarioId}/{groupId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Exercise> getExercises(@PathParam("scenarioId") int scenarioId, @PathParam("groupId") int groupId) {
+        return (sqlCoachDBFacet.getExercises(scenarioId, groupId));
+    }
+
+    @PUT
+    @Path("catalog/{scenarioId}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+
+    public List<Scenario> updateScenario(@PathParam("scenarioId") int scenarioId, Scenario sc){
+
+        sc.setScenarioId(scenarioId);
+        sqlCoachDBFacet.updateScenario(sc);
+        return sqlCoachDBFacet.getScenarios();
+
+    }
+
+
 
 
     @POST
@@ -76,6 +104,15 @@ public class CatalogResource {
         return sqlCoachDBFacet.getScenarios();
     }
 
+    @POST
+    @Path("catalog/{scenarioId}/add")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Group> addGroup(@PathParam("scenarioId") int scenarioId, Group group) {
+        group.setScenarioId(scenarioId);
+        sqlCoachDBFacet.addGroup(group);
+        return sqlCoachDBFacet.getGroups(scenarioId);
+    }
 
 
     @PUT
@@ -91,29 +128,10 @@ public class CatalogResource {
 
     }
 
-    @GET
-    @Path("catalog/{scenarioId}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<Group> getGroups(@PathParam("scenarioId") int scenarioId) {
-        return (sqlCoachDBFacet.getGroups(scenarioId));
-    }
 
 
-    @GET
-    @Path("catalog{scenarioId}/{groupId}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<Exercise> getExercises(@PathParam("scenarioId") int scenarioId, @PathParam("groupId") int groupId) {
-        return (sqlCoachDBFacet.getExercises(scenarioId, groupId));
-    }
 
-    @POST
-    @Path("catalog/{scenarioId}/add")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<Group> addGroup(@PathParam("scenarioId") int scenarioId, Group group) {
-        group.setScenarioId(scenarioId);
-        sqlCoachDBFacet.addGroup(group);
-        return sqlCoachDBFacet.getGroups(scenarioId);
-    }
+
+
 
 }
