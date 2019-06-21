@@ -24,13 +24,13 @@ import java.util.List;
  * Zu Beginn wird eine Datenquelle erzeugt, z.B. eine Datenbankverbindung.
  * Die Endpunkte sind mit ihrem jeweiligen Requesttyp {@code z.B. @GET } annotiert.
  * {@code @Produces} spezifiziert den MIME-Type der zurückgegebenen Ressource. Bei REST i.d.R. application/JSON
- * {@code @Consumes} spezifiziert den MIME-Type der akzeptierten Ressource.
+ * {@code @Consumes} spezifiziert den dockeMIME-Type der akzeptierten Ressource.
  * {@code @Path} gibt den Pfad relativ zum context-Root (hier cres) an.
  * Root resource (exposed at "myresource" path)
  *
  * @author Bastian Beggel, Johannes Schmitt
  */
-@Path("/v1/catalog")
+@Path("/v1")
 @Singleton
 public class CatalogResource {
 
@@ -58,7 +58,7 @@ public class CatalogResource {
 
     }
 
-
+    @Path("/catalog")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Scenario> getScenarios() {
@@ -67,7 +67,7 @@ public class CatalogResource {
 
 
     @POST
-    @Path("add")
+    @Path("catalog/add")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public List<Scenario> addScenario(Scenario sc)
@@ -79,7 +79,7 @@ public class CatalogResource {
 
 
     @PUT
-    @Path("{scenarioId}")
+    @Path("catalog/{scenarioId}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
 
@@ -92,7 +92,7 @@ public class CatalogResource {
     }
 
     @GET
-    @Path("{scenarioId}")
+    @Path("catalog/{scenarioId}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Group> getGroups(@PathParam("scenarioId") int scenarioId) {
         return (sqlCoachDBFacet.getGroups(scenarioId));
@@ -100,14 +100,14 @@ public class CatalogResource {
 
 
     @GET
-    @Path("{scenarioId}/{groupId}")
+    @Path("catalog{scenarioId}/{groupId}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Exercise> getExercises(@PathParam("scenarioId") int scenarioId, @PathParam("groupId") int groupId) {
         return (sqlCoachDBFacet.getExercises(scenarioId, groupId));
     }
 
     @POST
-    @Path("{scenarioId}/add")
+    @Path("catalog/{scenarioId}/add")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public List<Group> addGroup(@PathParam("scenarioId") int scenarioId, Group group) {
