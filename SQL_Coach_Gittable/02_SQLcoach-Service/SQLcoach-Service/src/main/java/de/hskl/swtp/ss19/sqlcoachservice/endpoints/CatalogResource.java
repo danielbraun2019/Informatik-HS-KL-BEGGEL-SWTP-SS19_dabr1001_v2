@@ -78,20 +78,6 @@ public class CatalogResource {
         return (sqlCoachDBFacet.getExercises(scenarioId, groupId));
     }
 
-    @PUT
-    @Path("catalog/{scenarioId}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-
-    public List<Scenario> updateScenario(@PathParam("scenarioId") int scenarioId, Scenario sc){
-
-        sc.setScenarioId(scenarioId);
-        sqlCoachDBFacet.updateScenario(sc);
-        return sqlCoachDBFacet.getScenarios();
-
-    }
-
-
 
 
     @POST
@@ -128,6 +114,18 @@ public class CatalogResource {
 
     }
 
+    @PUT
+    @Path("catalog/{scenarioId}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+
+    public List<Scenario> updateScenario(@PathParam("scenarioId") int scenarioId, Scenario sc){
+
+        sc.setScenarioId(scenarioId);
+        sqlCoachDBFacet.updateScenario(sc);
+        return sqlCoachDBFacet.getScenarios();
+
+    }
 
 
 
