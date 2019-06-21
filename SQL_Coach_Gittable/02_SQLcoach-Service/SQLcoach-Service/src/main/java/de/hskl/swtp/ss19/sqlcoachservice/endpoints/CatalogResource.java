@@ -135,9 +135,6 @@ public class CatalogResource {
         gp.setGroupId(groupId);
         sqlCoachDBFacet.updateGroup(gp);
         return sqlCoachDBFacet.getGroups(scenarioId);
-
-    }
-
     @PUT
     @Path("catalog/{scenarioId}/{groupId}/{exerciseId}")
     @Consumes(MediaType.APPLICATION_JSON)
