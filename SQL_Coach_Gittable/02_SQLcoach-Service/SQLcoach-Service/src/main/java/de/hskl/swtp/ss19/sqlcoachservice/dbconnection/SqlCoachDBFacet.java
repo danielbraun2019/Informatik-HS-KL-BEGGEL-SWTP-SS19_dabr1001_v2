@@ -369,6 +369,37 @@ public class SqlCoachDBFacet {
 
     }
 
+    public void updateGroup(Group gp) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("UPDATE ");
+        sb.append("\n sc_group ");
+        sb.append("\n SET ");
 
+        sb.append("\n groupName = ? "); // 1
+        sb.append("\n ,scenarioId = ? "); // 2
+
+
+        sb.append("\n WHERE ");
+        sb.append("\n groupId = ?");
+
+        try (Connection connection = getConnection()) {
+            PreparedStatement pstmt = connection.prepareStatement(sb.toString());
+
+            pstmt.setString(1, gp.getGroupName());
+            pstmt.setInt(2, gp.getScenarioId());
+            pstmt.setInt(3, gp.getGroupId());
+            int affectedRows = pstmt.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Failed to Update Scenario.");
+            }
+
+        } catch (SQLException exce) {
+            exce.printStackTrace();
+            throw new SqlCoachServiceException("ERROR updateDATA", exce);
+        }
+
+
+    }
 
 }

@@ -124,7 +124,19 @@ public class CatalogResource {
         return sqlCoachDBFacet.getScenarios();
 
     }
+    @PUT
+    @Path("catalog/{scenarioId}/{groupId}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
 
+    public List<Group> updateGroup(@PathParam("scenarioId") int scenarioId, @PathParam("groupId") int groupId, Group gp) {
+
+        gp.setScenarioId(scenarioId);
+        gp.setGroupId(groupId);
+        sqlCoachDBFacet.updateGroup(gp);
+        return sqlCoachDBFacet.getGroups(scenarioId);
+
+    }
 
 
 
