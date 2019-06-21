@@ -138,6 +138,19 @@ public class CatalogResource {
 
     }
 
+    @PUT
+    @Path("catalog/{scenarioId}/{groupId}/{exerciseId}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Exercise> updateExercise(@PathParam("scenarioId") int scenarioId, @PathParam("groupId") int groupId, @PathParam("exerciseId") int exerciseId, Exercise e) {
+
+        e.setScenarioId(scenarioId);
+        e.setGroupId(groupId);
+        e.setExerciseId(exerciseId);
+        sqlCoachDBFacet.updateExercise(e);
+        return sqlCoachDBFacet.getExercises(scenarioId, groupId);
+
+    }
 
 
 

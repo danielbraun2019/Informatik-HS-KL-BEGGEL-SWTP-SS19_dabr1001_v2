@@ -401,5 +401,39 @@ public class SqlCoachDBFacet {
 
 
     }
+    public void updateExercise(Exercise e) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("UPDATE ");
+        sb.append("\n sc_exercise ");
+        sb.append("\n SET ");
+
+        sb.append("\n exerciseText = ? "); // 1
+        sb.append("\n ,exerciseSolution = ? "); // 2
+        sb.append("\n ,groupId= ? "); // 3
+
+        sb.append("\n WHERE ");
+        sb.append("\n exerciseId = ?");//5
+
+        try (Connection connection = getConnection()) {
+            PreparedStatement pstmt = connection.prepareStatement(sb.toString());
+
+            pstmt.setString(1, e.getExerciseText());
+            pstmt.setString(2, e.getExerciseSolution());
+            pstmt.setInt(3, e.getGroupId());
+            pstmt.setInt(4, e.getExerciseId());
+            int affectedRows = pstmt.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Failed to Update Scenario.");
+            }
+
+        } catch (SQLException exce) {
+            exce.printStackTrace();
+            throw new SqlCoachServiceException("ERROR updateDATA", exce);
+        }
+
+
+    }
+
 
 }
