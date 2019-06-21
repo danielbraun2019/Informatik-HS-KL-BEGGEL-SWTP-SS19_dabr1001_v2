@@ -276,6 +276,7 @@ public class SqlCoachDBFacet {
     }
         return group;
 }
+
     /**
      * Methode zum Speichern von Aufgaben.
      * @param exercise die zu Speichernde Aufgabe
