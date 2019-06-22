@@ -40,7 +40,7 @@ public class CatalogResource {
      * Stellt eine Verbindung zur Datenbank her und verwendet ein SqlCoachDBFacet um die Daten für die REST-Endpunkte
      * zur Verfügung zu stellen.
      *
-     * @throws an Exception Wirft einen Fehler, wenn die postgress_properties.local nicht vorhanden ist.
+     * @throws  Exception Wirft einen Fehler, wenn die postgress_properties.local nicht vorhanden ist.
      */
     public CatalogResource() {
         String postgresProperties = System.getenv("postgres_properties");
@@ -135,6 +135,7 @@ public class CatalogResource {
         gp.setGroupId(groupId);
         sqlCoachDBFacet.updateGroup(gp);
         return sqlCoachDBFacet.getGroups(scenarioId);
+    }
     @PUT
     @Path("catalog/{scenarioId}/{groupId}/{exerciseId}")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -145,7 +146,7 @@ public class CatalogResource {
         e.setGroupId(groupId);
         e.setExerciseId(exerciseId);
         sqlCoachDBFacet.updateExercise(e);
-        return sqlCoachDBFacet.getExercises(scenarioId, groupId);
+        return (sqlCoachDBFacet.getExercises(scenarioId, groupId));
 
     }
 

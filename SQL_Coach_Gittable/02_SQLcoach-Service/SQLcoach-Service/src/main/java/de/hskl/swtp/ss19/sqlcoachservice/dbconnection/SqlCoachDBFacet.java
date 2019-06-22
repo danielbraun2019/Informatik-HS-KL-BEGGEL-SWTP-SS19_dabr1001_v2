@@ -431,8 +431,6 @@ public class SqlCoachDBFacet {
             exce.printStackTrace();
             throw new SqlCoachServiceException("ERROR updateDATA", exce);
         }
-
-
     }
 
 
