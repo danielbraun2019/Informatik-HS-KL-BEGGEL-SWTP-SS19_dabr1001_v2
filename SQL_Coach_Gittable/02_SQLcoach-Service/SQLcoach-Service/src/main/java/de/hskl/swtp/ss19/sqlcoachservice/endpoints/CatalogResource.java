@@ -149,6 +149,14 @@ public class CatalogResource {
         return (sqlCoachDBFacet.getExercises(scenarioId, groupId));
 
     }
+    @DELETE
+    @Path("catalog/{scenarioId}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Scenario> deleteScenario(@PathParam("scenarioId") int scenarioId) {
+        sqlCoachDBFacet.deleteScenario(scenarioId);
+        return (sqlCoachDBFacet.getScenarios());
+    }
 
 
 
