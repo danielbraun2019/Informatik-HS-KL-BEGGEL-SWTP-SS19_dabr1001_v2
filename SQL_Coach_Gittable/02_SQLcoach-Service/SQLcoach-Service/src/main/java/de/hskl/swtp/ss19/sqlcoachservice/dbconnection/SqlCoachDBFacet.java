@@ -455,9 +455,35 @@ public class SqlCoachDBFacet {
             exce.printStackTrace();
             throw new SqlCoachServiceException("ERROR deleteDATA", exce);
         }
-
-
     }
+
+    public void deleteGroup(int scenarioId, int groupId) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("DELETE FROM");
+        sb.append("\n sc_group ");
+
+        sb.append("\n WHERE ");
+        sb.append("\n scenarioId = ?");//1
+        sb.append("\n AND groupId = ?");//2
+
+
+        try (Connection connection = getConnection()) {
+            PreparedStatement pstmt = connection.prepareStatement(sb.toString());
+
+            pstmt.setInt(1, scenarioId);
+            pstmt.setInt(2, groupId);
+            int affectedRows = pstmt.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Failed to Delete Group, there might not exist a Group with matching groupId.");
+            }
+
+        } catch (SQLException exce) {
+            exce.printStackTrace();
+            throw new SqlCoachServiceException("ERROR deleteDATA", exce);
+        }
+    }
+
 
 
 }
