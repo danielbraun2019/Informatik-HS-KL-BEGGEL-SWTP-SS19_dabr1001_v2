@@ -448,7 +448,7 @@ public class SqlCoachDBFacet {
             int affectedRows = pstmt.executeUpdate();
 
             if (affectedRows == 0) {
-                throw new SQLException("\"Failed to Delete Scenario, there might not exist a Group with matching scenarioId.\"");
+                throw new SQLException("\"Failed to Delete Scenario, there might not exist a Scenario with matching scenarioId.\"");
             }
 
         } catch (SQLException exce) {
@@ -500,7 +500,7 @@ public class SqlCoachDBFacet {
             int affectedRows = pstmt.executeUpdate();
 
             if (affectedRows == 0) {
-                throw new SQLException("Failed to Delete Scenario, there might not exist a Scenario with matching groupId.");
+                throw new SQLException("Failed to Delete Exercise, there might not exist a Exercise with matching exerciseId.");
             }
 
         } catch (SQLException exce) {
