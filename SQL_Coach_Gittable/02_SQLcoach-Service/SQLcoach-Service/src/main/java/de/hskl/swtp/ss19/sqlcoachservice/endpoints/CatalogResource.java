@@ -165,4 +165,12 @@ public class CatalogResource {
         sqlCoachDBFacet.deleteGroup(scenarioId, groupId);
         return (sqlCoachDBFacet.getGroups(scenarioId));
     }
+    @DELETE
+    @Path("catalog/{scenarioId}/{groupId}/{exerciseId}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Exercise> deleteExercise(@PathParam("scenarioId") int scenarioId, @PathParam("groupId") int groupId, @PathParam("exerciseId") int exerciseId) {
+        sqlCoachDBFacet.deleteExercise(groupId, exerciseId);
+        return (sqlCoachDBFacet.getExercises(scenarioId, groupId));
+    }
 }
