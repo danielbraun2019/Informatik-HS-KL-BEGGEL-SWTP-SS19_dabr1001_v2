@@ -4,6 +4,7 @@ import de.hskl.swtp.ss19.sqlcoachservice.exception.SqlCoachServiceException;
 import de.hskl.swtp.ss19.sqlcoachservice.model.Exercise;
 import de.hskl.swtp.ss19.sqlcoachservice.model.Group;
 import de.hskl.swtp.ss19.sqlcoachservice.model.Scenario;
+import de.hskl.swtp.ss19.sqlcoachservice.model.Table_shemas;
 import org.apache.log4j.Logger;
 
 import javax.sql.DataSource;
@@ -509,6 +510,76 @@ public class SqlCoachDBFacet {
         }
 
 
+    }
+    public List<Table_shemas> getTableShemas() {
+        List<Table_shemas> table_shemas = new ArrayList<>();
+        List<String> tablenames = getTableNames();
+        for(String tablename:tablenames) {
+            try (Connection connection = getConnection()) {
+                table_shemas.add(new Table_shemas(tablename,getColumnNames(tablename),getPrimaryKey(tablename),getForeignKeys(tablename)));
+            } catch (SQLException exce) {
+                exce.printStackTrace();
+                throw new SqlCoachServiceException("ERROR loadData", exce);
+            }
+        }
+        return (table_shemas);
+    }
+    private  List<String> getTableNames(){
+        List<String> table_names = new ArrayList<>();
+        try (Connection connection = getConnection()) {
+            DatabaseMetaData metadata = connection.getMetaData();
+            String[] ArrayofDoom = new String[]{"TABLE"};
+            ResultSet rs = metadata.getTables(connection.getCatalog(), connection.getSchema(), null, ArrayofDoom);
+            while (rs.next()) {
+                table_names.add(rs.getString("TABLE_NAME"));
+            }
+        } catch (SQLException exce) {
+            exce.printStackTrace();
+            throw new SqlCoachServiceException("ERROR loadData", exce);
+        }
+        return (table_names);
+    }
+    private List<String> getColumnNames(String table_name) {
+        List<String> ListOfColumnNames = new ArrayList<>();
+        try (Connection connection = getConnection()) {
+            DatabaseMetaData metadata = connection.getMetaData();
+            ResultSet rs = metadata.getColumns(connection.getCatalog(), connection.getSchema(),table_name, null);
+            while (rs.next()) {
+                ListOfColumnNames.add(rs.getString("Column_NAME"));
+            }
+        } catch (SQLException exce) {
+            exce.printStackTrace();
+            throw new SqlCoachServiceException("ERROR loadData", exce);
+        }
+        return (ListOfColumnNames);
+    }
+    private String getPrimaryKey(String tablename) {
+        String primary_key;
+        try (Connection connection = getConnection()) {
+            DatabaseMetaData metadata = connection.getMetaData();
+            ResultSet rs = metadata.getPrimaryKeys(connection.getCatalog(), connection.getSchema(),tablename);
+            rs.next();
+            primary_key=rs.getString("PK_Name");
+        } catch (SQLException exce) {
+            exce.printStackTrace();
+            throw new SqlCoachServiceException("ERROR loadData", exce);
+        }
+        return (primary_key);
+    }
+    private List<String> getForeignKeys(String tablename) {
+        List<String> ListOfForeignKeys = new ArrayList<>();
+        try (Connection connection = getConnection()) {
+            DatabaseMetaData metadata = connection.getMetaData();
+            ResultSet rs = metadata.getImportedKeys(connection.getCatalog(), connection.getSchema(),tablename);
+            while (rs.next()) {
+                ListOfForeignKeys.add(rs.getString("FKTABLE_NAME"));
+                System.out.println(rs.getString("FKTABLE_NAME"));
+            }
+        } catch (SQLException exce) {
+            exce.printStackTrace();
+            throw new SqlCoachServiceException("ERROR loadData", exce);
+        }
+        return (ListOfForeignKeys);
     }
 
 

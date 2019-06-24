@@ -6,6 +6,7 @@ import de.hskl.swtp.ss19.sqlcoachservice.exception.SqlCoachServiceException;
 import de.hskl.swtp.ss19.sqlcoachservice.model.Exercise;
 import de.hskl.swtp.ss19.sqlcoachservice.model.Group;
 import de.hskl.swtp.ss19.sqlcoachservice.model.Scenario;
+import de.hskl.swtp.ss19.sqlcoachservice.model.Table_shemas;
 import de.hskl.swtp.ss19.sqlcoachservice.util.DataSourceFactory;
 
 
@@ -28,9 +29,9 @@ import java.util.List;
  * {@code @Path} gibt den Pfad relativ zum context-Root (hier cres) an.
  * Root resource (exposed at "myresource" path)
  *
- * @author Bastian Beggel, Johannes Schmitt
+ * @author Bastian Beggel, Johannes Schmitt, Daniel Braun
  */
-@Path("/v1")
+@Path("/v1/")
 @Singleton
 public class CatalogResource {
 
@@ -49,8 +50,7 @@ public class CatalogResource {
         }
         try {
             URL config = CatalogResource.class.getClassLoader().getResource(postgresProperties);
-            DataSource dataSource = null;
-            dataSource = DataSourceFactory.generateFromResourceFile(postgresProperties);
+            DataSource dataSource = DataSourceFactory.generateFromResourceFile(postgresProperties);
             sqlCoachDBFacet = new SqlCoachDBFacet(dataSource);
         } catch (IOException e) {
             throw new SqlCoachServiceException("Error intializing datapool for "+ postgresProperties);
@@ -58,7 +58,7 @@ public class CatalogResource {
 
     }
     //Get-Befehle für Szenario, Aufgabengruppe und Aufgabe
-    @Path("/catalog")
+    @Path("catalog")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Scenario> getScenarios() {
@@ -172,5 +172,12 @@ public class CatalogResource {
     public List<Exercise> deleteExercise(@PathParam("scenarioId") int scenarioId, @PathParam("groupId") int groupId, @PathParam("exerciseId") int exerciseId) {
         sqlCoachDBFacet.deleteExercise(groupId, exerciseId);
         return (sqlCoachDBFacet.getExercises(scenarioId, groupId));
+    }
+    @GET
+    @Path("catalog/tables")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Table_shemas> getTableDefinition() {
+        return (sqlCoachDBFacet.getTableShemas());
     }
 }

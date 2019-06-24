@@ -1,4 +1,4 @@
-# build postgres and tomcat images
+# build postgres and tomcat images as well as personDB
 version: '3.1'
 
 services:
@@ -21,3 +21,13 @@ services:
       - 8001:8080
     depends_on:
       - sqlcoachservice-db
+
+  sqlcoachservice-db-personaldatensatz:
+    build:
+      context: .
+      dockerfile: docker_postgres/Dockerfile_personaldatensatz
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: pass
+    ports:
+      - 5000:5000
