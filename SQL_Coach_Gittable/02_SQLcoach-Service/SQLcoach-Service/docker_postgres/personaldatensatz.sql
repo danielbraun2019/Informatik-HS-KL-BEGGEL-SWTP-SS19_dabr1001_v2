@@ -107,3 +107,27 @@ INSERT INTO abteilung(abtnr, abtname, budget, chefnr)
 VALUES (11, 'Einkauf',	15000,	1);
 INSERT INTO abteilung(abtnr, abtname, budget, chefnr)
 VALUES (12, 'Verkauf',	30000,	1);
+
+
+INSERT INTO projekt(projnr, budget, abtnr)
+VALUES (1, 5000,	1);
+INSERT INTO projekt(projnr, budget, abtnr)
+VALUES (2, 1000,	1);
+INSERT INTO projekt(projnr, budget, abtnr)
+VALUES (3, 2200,	10);
+INSERT INTO projekt(projnr, budget, abtnr)
+VALUES (4, 100,	3);
+INSERT INTO projekt(projnr, budget, abtnr)
+VALUES (5, 500,	4);
+INSERT INTO projekt(projnr, budget, abtnr)
+VALUES (6, 1000,	1);
+INSERT INTO projekt(projnr, budget, abtnr)
+VALUES (7, 3000,	4);
+INSERT INTO projekt(projnr, budget, abtnr)
+VALUES (8, 1000,	8);
+INSERT INTO projekt(projnr, budget, abtnr)
+VALUES (9, 1000,	4);
+INSERT INTO projekt(projnr, budget, abtnr)
+VALUES (10, 1000,	7);
+INSERT INTO projekt(projnr, budget, abtnr)
+VALUES (23, 5500,	3);
