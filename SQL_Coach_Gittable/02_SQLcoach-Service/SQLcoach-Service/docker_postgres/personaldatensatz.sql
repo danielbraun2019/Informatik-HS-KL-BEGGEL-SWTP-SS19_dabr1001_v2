@@ -81,54 +81,6 @@ VALUES (93,'Fenn',	        'Sterputz',	4, 4203, 2000);
 INSERT INTO personal(PersNr, VNAME, NName, ProjNr, TelefonNr, Gehalt)
 VALUES (94,'Heinz',  	'Elmann',	4, 4204, 7000);
 
-INSERT INTO abteilung(abtnr, abtname, budget, chefnr)
-VALUES (1, 'Buchhaltung',	10000,	1);
-INSERT INTO abteilung(abtnr, abtname, budget, chefnr)
-VALUES (2, 'FuE',		15000,	71);
-INSERT INTO abteilung(abtnr, abtname, budget, chefnr)
-VALUES (3, 'Immobilien',	4000,	91);
-INSERT INTO abteilung(abtnr, abtname, budget, chefnr)
-VALUES (4, 'Marketing',	50000,	81);
-INSERT INTO abteilung(abtnr, abtname, budget, chefnr)
-VALUES (5, 'Controling',	20000,	94);
-INSERT INTO abteilung(abtnr, abtname, budget, chefnr)
-VALUES (6, 'Hausmeister', 1000,	94);
-INSERT INTO abteilung(abtnr, abtname, budget, chefnr)
-VALUES (7, 'Kantine',	1000,	94);
-INSERT INTO abteilung(abtnr, abtname, budget, chefnr)
-VALUES (8, 'Vorstand',	100000,	94);
-INSERT INTO abteilung(abtnr, abtname, budget, chefnr)
-VALUES (9, 'Fuhrpark',	7000,	94);
-INSERT INTO abteilung(abtnr, abtname, budget, chefnr)
-VALUES (10, 'Service',	30000,	71);
-INSERT INTO abteilung(abtnr, abtname, budget, chefnr)
-VALUES (11, 'Einkauf',	15000,	1);
-INSERT INTO abteilung(abtnr, abtname, budget, chefnr)
-VALUES (12, 'Verkauf',	30000,	1);
-
-
-INSERT INTO projekt(projnr, budget, abtnr)
-VALUES (1, 5000,	1);
-INSERT INTO projekt(projnr, budget, abtnr)
-VALUES (2, 1000,	1);
-INSERT INTO projekt(projnr, budget, abtnr)
-VALUES (3, 2200,	10);
-INSERT INTO projekt(projnr, budget, abtnr)
-VALUES (4, 100,	3);
-INSERT INTO projekt(projnr, budget, abtnr)
-VALUES (5, 500,	4);
-INSERT INTO projekt(projnr, budget, abtnr)
-VALUES (6, 1000,	1);
-INSERT INTO projekt(projnr, budget, abtnr)
-VALUES (7, 3000,	4);
-INSERT INTO projekt(projnr, budget, abtnr)
-VALUES (8, 1000,	8);
-INSERT INTO projekt(projnr, budget, abtnr)
-VALUES (9, 1000,	4);
-INSERT INTO projekt(projnr, budget, abtnr)
-VALUES (10, 1000,	7);
-INSERT INTO projekt(projnr, budget, abtnr)
-VALUES (23, 5500,	3);
 
 INSERT INTO akte(PersNr, Datum, "Position", Gehalt)
 VALUES (1, '2009-04-01', 'Oberbuchhalter',	1000);
@@ -204,3 +156,53 @@ INSERT INTO akte(PersNr, Datum, "Position", Gehalt)
 VALUES (84, '2008-01-01', 'Berater',	1500);
 INSERT INTO akte(PersNr, Datum, "Position", Gehalt)
 VALUES (84, '2009-01-01', 'Berater',	2000);
+
+
+INSERT INTO abteilung(abtnr, abtname, budget, chefnr)
+VALUES (1, 'Buchhaltung',	10000,	1);
+INSERT INTO abteilung(abtnr, abtname, budget, chefnr)
+VALUES (2, 'FuE',		15000,	71);
+INSERT INTO abteilung(abtnr, abtname, budget, chefnr)
+VALUES (3, 'Immobilien',	4000,	91);
+INSERT INTO abteilung(abtnr, abtname, budget, chefnr)
+VALUES (4, 'Marketing',	50000,	81);
+INSERT INTO abteilung(abtnr, abtname, budget, chefnr)
+VALUES (5, 'Controling',	20000,	94);
+INSERT INTO abteilung(abtnr, abtname, budget, chefnr)
+VALUES (6, 'Hausmeister', 1000,	94);
+INSERT INTO abteilung(abtnr, abtname, budget, chefnr)
+VALUES (7, 'Kantine',	1000,	94);
+INSERT INTO abteilung(abtnr, abtname, budget, chefnr)
+VALUES (8, 'Vorstand',	100000,	94);
+INSERT INTO abteilung(abtnr, abtname, budget, chefnr)
+VALUES (9, 'Fuhrpark',	7000,	94);
+INSERT INTO abteilung(abtnr, abtname, budget, chefnr)
+VALUES (10, 'Service',	30000,	71);
+INSERT INTO abteilung(abtnr, abtname, budget, chefnr)
+VALUES (11, 'Einkauf',	15000,	1);
+INSERT INTO abteilung(abtnr, abtname, budget, chefnr)
+VALUES (12, 'Verkauf',	30000,	1);
+
+
+INSERT INTO projekt(projnr, budget, abtnr)
+VALUES (1, 5000,	1);
+INSERT INTO projekt(projnr, budget, abtnr)
+VALUES (2, 1000,	1);
+INSERT INTO projekt(projnr, budget, abtnr)
+VALUES (3, 2200,	10);
+INSERT INTO projekt(projnr, budget, abtnr)
+VALUES (4, 100,	3);
+INSERT INTO projekt(projnr, budget, abtnr)
+VALUES (5, 500,	4);
+INSERT INTO projekt(projnr, budget, abtnr)
+VALUES (6, 1000,	1);
+INSERT INTO projekt(projnr, budget, abtnr)
+VALUES (7, 3000,	4);
+INSERT INTO projekt(projnr, budget, abtnr)
+VALUES (8, 1000,	8);
+INSERT INTO projekt(projnr, budget, abtnr)
+VALUES (9, 1000,	4);
+INSERT INTO projekt(projnr, budget, abtnr)
+VALUES (10, 1000,	7);
+INSERT INTO projekt(projnr, budget, abtnr)
+VALUES (23, 5500,	3);
