@@ -11,14 +11,14 @@ import java.util.List;
 public class Table_shemas {
     private String tableName;
     private List<String> column_names;
-    private String primary_key;
+    private List<String> primary_key;
     private List<String> foreign_key;
 
     public Table_shemas() {
     }
 
 
-    public Table_shemas(String tableName, List<String> column_names, String primary_key, List<String> foreign_key) {
+    public Table_shemas(String tableName, List<String> column_names, List<String> primary_key, List<String> foreign_key) {
         this.tableName = tableName;
         this.column_names = column_names;
         this.primary_key = primary_key;
@@ -41,11 +41,11 @@ public class Table_shemas {
         this.column_names = column_names;
     }
 
-    public String getPrimary_key() {
+    public List<String> getPrimary_key() {
         return primary_key;
     }
 
-    public void setPrimary_key(String primary_key) {
+    public void setPrimary_key(List<String> primary_key) {
         this.primary_key = primary_key;
     }
 

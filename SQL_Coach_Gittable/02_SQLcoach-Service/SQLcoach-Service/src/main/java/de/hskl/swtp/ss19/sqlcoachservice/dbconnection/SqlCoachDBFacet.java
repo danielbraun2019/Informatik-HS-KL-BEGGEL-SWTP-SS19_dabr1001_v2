@@ -553,18 +553,19 @@ public class SqlCoachDBFacet {
         }
         return (ListOfColumnNames);
     }
-    private String getPrimaryKey(String tablename) {
-        String primary_key;
+    private List<String> getPrimaryKey(String tablename) {
+        List<String> primary_keys=new ArrayList<>();
         try (Connection connection = getConnection()) {
             DatabaseMetaData metadata = connection.getMetaData();
             ResultSet rs = metadata.getPrimaryKeys(connection.getCatalog(), connection.getSchema(),tablename);
-            rs.next();
-            primary_key=rs.getString("PK_Name");
+            while (rs.next()) {
+                primary_keys.add(rs.getString("COLUMN_NAME"));
+            }
         } catch (SQLException exce) {
             exce.printStackTrace();
             throw new SqlCoachServiceException("ERROR loadData", exce);
         }
-        return (primary_key);
+        return (primary_keys);
     }
     private List<String> getForeignKeys(String tablename) {
         List<String> ListOfForeignKeys = new ArrayList<>();
@@ -572,8 +573,8 @@ public class SqlCoachDBFacet {
             DatabaseMetaData metadata = connection.getMetaData();
             ResultSet rs = metadata.getImportedKeys(connection.getCatalog(), connection.getSchema(),tablename);
             while (rs.next()) {
-                ListOfForeignKeys.add(rs.getString("FKTABLE_NAME"));
-                System.out.println(rs.getString("FKTABLE_NAME"));
+                ListOfForeignKeys.add(rs.getString("FK_NAME"));
+                System.out.println(rs.getString("FK_NAME"));
             }
         } catch (SQLException exce) {
             exce.printStackTrace();
