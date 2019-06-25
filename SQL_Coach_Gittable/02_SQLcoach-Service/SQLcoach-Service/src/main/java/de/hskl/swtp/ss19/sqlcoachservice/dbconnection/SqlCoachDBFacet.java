@@ -594,6 +594,30 @@ public class SqlCoachDBFacet {
         List<QueryReturn> query_return = new ArrayList<>();
         return (query_return);
     }
+
+
+
+    /* Methode erlaubt das audführen von SQL insert queries
+    Mit Postman prüfbar:
+    http://localhost:8001/sqlcoachservice/api/v1/dataset/1/execute?query=insert into personal  (PersNr, VNAME, NName, ProjNr, TelefonNr, Gehalt)
+    VALUES (123, 'Donald',	'TRUMP',	5, 1201, 1000)
+     */
+
+    public List<QueryReturn> insertQuery(String Query) {
+        if (Query.startsWith("insert")) {
+            String[] s =Query.split(" ");
+            System.out.println(s[2]);
+            StringBuilder sb = new StringBuilder();
+            executeQueryforInsert_and_Update(Query);
+            sb.append("select*from ");
+            sb.append(s[2]);
+
+            return(executeQuery(sb.toString()));
+        }
+        List<QueryReturn> query_return = new ArrayList<>();
+        return (query_return);
+    }
+
     private List<QueryReturn> executeQuery(String Query) {
         List<QueryReturn> query_return = new ArrayList<>();
         try (Connection connection = getConnection()) {
@@ -614,11 +638,27 @@ public class SqlCoachDBFacet {
                     query_return.add(new QueryReturn(columnnameandvaluesList));
 
                 }
-                System.out.println(query_return);
             } catch (SQLException exce) {
                 exce.printStackTrace();
                 throw new SqlCoachServiceException("ERROR loadData", exce);
             }
         return (query_return);
+    }
+
+    private void executeQueryforInsert_and_Update(String Query) {
+        List<QueryReturn> query_return = new ArrayList<>();
+        try (Connection connection = getConnection()) {
+            PreparedStatement pstmt = (PreparedStatement) connection.prepareStatement(Query, Statement.RETURN_GENERATED_KEYS);
+            int affectedRows = pstmt.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Creating user failed, no rows affected.");
+            }
+        }
+        catch (SQLException exce)
+        {
+            exce.printStackTrace();
+            throw new SqlCoachServiceException("ERROR addExercise", exce);
+        }
     }
 }

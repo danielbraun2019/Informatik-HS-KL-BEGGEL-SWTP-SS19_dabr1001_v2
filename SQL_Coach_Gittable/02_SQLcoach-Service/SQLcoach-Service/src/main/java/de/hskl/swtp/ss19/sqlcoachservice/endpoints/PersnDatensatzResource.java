@@ -68,4 +68,12 @@ public class PersnDatensatzResource {
         return (sqlCoachDBFacetTraining.selectQuery(query));
 
     }
+    @POST
+    @Path("/execute")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<QueryReturn> insertQuery(@QueryParam("query") String query) {
+        return (sqlCoachDBFacetTraining.insertQuery(query));
+
+    }
 }
