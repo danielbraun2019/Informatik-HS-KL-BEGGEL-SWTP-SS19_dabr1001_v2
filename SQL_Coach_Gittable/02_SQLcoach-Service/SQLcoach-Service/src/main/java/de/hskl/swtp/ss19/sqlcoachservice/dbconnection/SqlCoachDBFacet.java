@@ -574,7 +574,6 @@ public class SqlCoachDBFacet {
             ResultSet rs = metadata.getImportedKeys(connection.getCatalog(), connection.getSchema(),tablename);
             while (rs.next()) {
                 ListOfForeignKeys.add(rs.getString("FK_NAME"));
-                System.out.println(rs.getString("FK_NAME"));
             }
         } catch (SQLException exce) {
             exce.printStackTrace();

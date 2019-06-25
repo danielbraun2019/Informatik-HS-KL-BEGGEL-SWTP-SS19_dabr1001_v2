@@ -207,6 +207,6 @@ VALUES (10, 1000,	7);
 INSERT INTO projekt(projnr, budget, abtnr)
 VALUES (23, 5500,	3);
 
-
+--Fremdschlüssel muss nach Tabellenerstellung hinzugefügt werde, weil sonst Zykel in den Tabellen entstehen
 ALTER TABLE Personal ADD CONSTRAINT proj_ok
 FOREIGN KEY (ProjNr) REFERENCES Projekt DEFERRABLE;
