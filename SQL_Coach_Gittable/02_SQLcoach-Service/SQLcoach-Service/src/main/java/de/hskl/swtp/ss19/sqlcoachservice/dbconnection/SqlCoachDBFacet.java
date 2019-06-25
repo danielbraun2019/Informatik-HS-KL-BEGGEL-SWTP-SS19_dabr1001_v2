@@ -5,6 +5,7 @@ import de.hskl.swtp.ss19.sqlcoachservice.model.Exercise;
 import de.hskl.swtp.ss19.sqlcoachservice.model.Group;
 import de.hskl.swtp.ss19.sqlcoachservice.model.Scenario;
 import de.hskl.swtp.ss19.sqlcoachservice.model.Table_shemas;
+import de.hskl.swtp.ss19.sqlcoachservice.model.QueryReturn;
 import org.apache.log4j.Logger;
 
 import javax.sql.DataSource;
@@ -582,5 +583,38 @@ public class SqlCoachDBFacet {
         return (ListOfForeignKeys);
     }
 
+
+
+/////////////////////////////////////////////////////////
+    public List<QueryReturn> executeQuery(String Query) {
+        StringBuilder exeQuery = new StringBuilder();
+        exeQuery.append(Query);
+       List<QueryReturn> query_return=new ArrayList<>();
+        try (Connection connection = getConnection()) {
+            PreparedStatement stmt = connection.prepareStatement(exeQuery.toString());
+            ResultSet rs = stmt.executeQuery();
+            ResultSetMetaData resultsetmetadata = rs.getMetaData();
+            int columnCount = resultsetmetadata.getColumnCount();
+
+            while(rs.next()){
+                List<String> columnnameandvaluesList=new ArrayList<>();
+                for (int i = 1; i <= columnCount ; i++) {
+                    StringBuilder  columnname_plusvalue = new StringBuilder();
+                    columnname_plusvalue.append(resultsetmetadata.getColumnName(i));
+                    columnname_plusvalue.append(": ");
+                    columnname_plusvalue.append(rs.getString(i));
+                    columnnameandvaluesList.add(columnname_plusvalue.toString());
+                }
+                query_return.add(new QueryReturn(columnnameandvaluesList));
+
+            }
+            System.out.println(query_return);
+        } catch (SQLException exce) {
+            exce.printStackTrace();
+            throw new SqlCoachServiceException("ERROR loadData", exce);
+        }
+
+        return (query_return);
+    }
 
 }

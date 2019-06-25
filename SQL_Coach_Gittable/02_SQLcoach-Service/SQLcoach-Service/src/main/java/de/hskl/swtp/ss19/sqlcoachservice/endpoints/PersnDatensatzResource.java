@@ -4,6 +4,7 @@ import de.hskl.swtp.ss19.sqlcoachservice.dbconnection.SqlCoachDBFacet;
 
 import de.hskl.swtp.ss19.sqlcoachservice.exception.SqlCoachServiceException;
 import de.hskl.swtp.ss19.sqlcoachservice.model.Table_shemas;
+import de.hskl.swtp.ss19.sqlcoachservice.model.QueryReturn;
 import de.hskl.swtp.ss19.sqlcoachservice.util.DataSourceFactory;
 
 
@@ -57,5 +58,14 @@ public class PersnDatensatzResource {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Table_shemas> getTableDefinition() {
         return (sqlCoachDBFacetTraining.getTableShemas());
+    }
+
+    @GET
+    @Path("/execute")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<QueryReturn> executeQuery(@QueryParam("query") String query) {
+        return (sqlCoachDBFacetTraining.executeQuery(query));
+
     }
 }
