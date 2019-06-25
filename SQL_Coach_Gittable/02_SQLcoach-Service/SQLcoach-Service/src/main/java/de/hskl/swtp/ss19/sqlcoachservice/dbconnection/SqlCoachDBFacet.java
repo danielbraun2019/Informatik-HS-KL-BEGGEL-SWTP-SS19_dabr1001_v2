@@ -588,10 +588,15 @@ public class SqlCoachDBFacet {
 
 /////////////////////////////////////////////////////////
     public List<QueryReturn> selectQuery(String Query) {
-        List<QueryReturn> query_return = new ArrayList<>();
-        System.out.println(Query);
         if (Query.startsWith("select")) {
-            try (Connection connection = getConnection()) {
+            return(executeQuery(Query));
+        }
+        List<QueryReturn> query_return = new ArrayList<>();
+        return (query_return);
+    }
+    private List<QueryReturn> executeQuery(String Query) {
+        List<QueryReturn> query_return = new ArrayList<>();
+        try (Connection connection = getConnection()) {
                 PreparedStatement stmt = connection.prepareStatement(Query);
                 ResultSet rs = stmt.executeQuery();
                 ResultSetMetaData resultsetmetadata = rs.getMetaData();
@@ -614,7 +619,6 @@ public class SqlCoachDBFacet {
                 exce.printStackTrace();
                 throw new SqlCoachServiceException("ERROR loadData", exce);
             }
-        }
         return (query_return);
     }
 }
