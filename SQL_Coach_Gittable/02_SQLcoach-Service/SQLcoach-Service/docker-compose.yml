@@ -28,6 +28,6 @@ services:
       dockerfile: docker_postgres/Dockerfile_personaldatensatz
     restart: always
     environment:
-      POSTGRES_PASSWORD: pass
+      POSTGRES_PASSWORD: test
     ports:
-      - 5000:5000
+      - 5000:5432

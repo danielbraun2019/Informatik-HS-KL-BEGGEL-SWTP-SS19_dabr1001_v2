@@ -37,8 +37,7 @@ public class PersnDatensatzResource {
     /**
      * Stellt eine Verbindung zur Personaldatenbank her und verwendet ein SqlCoachDBFacet um die Daten für die REST-Endpunkte
      * zur Verfügung zu stellen.
-     *
-     * @throws  Exception Wirft einen Fehler, wenn die postgress_properties.local nicht vorhanden ist.
+
      */
     public PersnDatensatzResource() {
         String properties=("postgres_docker_personaldatensatz.properties");
@@ -50,8 +49,8 @@ public class PersnDatensatzResource {
         } catch (IOException e) {
             throw new SqlCoachServiceException("Error intializing training ");
         }
-
     }
+
     @GET
     @Path("/tables")
     @Consumes(MediaType.APPLICATION_JSON)

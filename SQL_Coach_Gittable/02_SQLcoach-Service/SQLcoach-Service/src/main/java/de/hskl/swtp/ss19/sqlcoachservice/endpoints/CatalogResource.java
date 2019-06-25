@@ -41,7 +41,7 @@ public class CatalogResource {
      * Stellt eine Verbindung zur Datenbank her und verwendet ein SqlCoachDBFacet um die Daten für die REST-Endpunkte
      * zur Verfügung zu stellen.
      *
-     * @throws  Exception Wirft einen Fehler, wenn die postgress_properties.local nicht vorhanden ist.
+     * @throws  Exception Wirft einen Fehler, wenn die postgress_local.properties nicht vorhanden ist.
      */
     public CatalogResource() {
         String postgresProperties = System.getenv("postgres_properties");
