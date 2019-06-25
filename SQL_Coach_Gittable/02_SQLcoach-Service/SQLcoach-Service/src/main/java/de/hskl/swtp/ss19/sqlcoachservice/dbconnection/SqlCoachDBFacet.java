@@ -587,11 +587,9 @@ public class SqlCoachDBFacet {
 
 /////////////////////////////////////////////////////////
     public List<QueryReturn> executeQuery(String Query) {
-        StringBuilder exeQuery = new StringBuilder();
-        exeQuery.append(Query);
        List<QueryReturn> query_return=new ArrayList<>();
         try (Connection connection = getConnection()) {
-            PreparedStatement stmt = connection.prepareStatement(exeQuery.toString());
+            PreparedStatement stmt = connection.prepareStatement(Query);
             ResultSet rs = stmt.executeQuery();
             ResultSetMetaData resultsetmetadata = rs.getMetaData();
             int columnCount = resultsetmetadata.getColumnCount();
