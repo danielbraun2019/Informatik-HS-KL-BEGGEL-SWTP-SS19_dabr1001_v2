@@ -10,8 +10,7 @@ create table personal
   NName varchar(64)  NOT NULL,
   ProjNr    Decimal(4) NOT NULL,
   TelefonNr Decimal (10),
-  Gehalt    DECIMAL (8,2)  CHECK (Gehalt >=0),
-  rank      integer NOT NULL DEFAULT nextval('seq_personal_rank')
+  Gehalt    DECIMAL (8,2)  CHECK (Gehalt >=0)
 );
 
 create table akte
@@ -19,8 +18,7 @@ create table akte
       PersNr    INTEGER  NOT NULL references personal(PersNr),
       Datum     Date       NOT NULL,
       Position  VARCHAR(25),
-      Gehalt    DECIMAL(8,2) CHECK (Gehalt >= 0),
-      rank      decimal(5) NOT NULL,
+      Gehalt    DECIMAL(8,2) CHECK (Gehalt >= 0)
       PRIMARY KEY (PersNr,Datum)
 );
 
@@ -131,3 +129,78 @@ INSERT INTO projekt(projnr, budget, abtnr)
 VALUES (10, 1000,	7);
 INSERT INTO projekt(projnr, budget, abtnr)
 VALUES (23, 5500,	3);
+
+INSERT INTO akte(PersNr, Datum, "Position", Gehalt)
+VALUES (1, '2009-04-01', 'Oberbuchhalter',	1000);
+INSERT INTO akte(PersNr, Datum, "Position", Gehalt)
+VALUES (1, '2006-01-01', 'Hilfsbuchhalter',	100);
+INSERT INTO akte(PersNr, Datum, "Position", Gehalt)
+VALUES (1, '2007-09-01', 'Buchhalter',		500);
+INSERT INTO akte(PersNr, Datum, "Position", Gehalt)
+VALUES (2, '2007-11-01', 'Buchhalter',		200);
+INSERT INTO akte(PersNr, Datum, "Position", Gehalt)
+VALUES (2, '2007-01-01', 'Hilfsuchhalter',	90);
+INSERT INTO akte(PersNr, Datum, "Position", Gehalt)
+VALUES (3, '2007-01-01', 'Hilfsbuchhalter',	90);
+INSERT INTO akte(PersNr, Datum, "Position", Gehalt)
+ALUES (4, '2007-01-01', 'Hilfsbuchhalter',	90);
+INSERT INTO akte(PersNr, Datum, "Position", Gehalt)
+VALUES (5, '2007-01-01', 'Hilfsbuchhalter',	90);
+INSERT INTO akte(PersNr, Datum, "Position", Gehalt)
+VALUES (6, '2003-01-01', 'Angestellter',		2000);
+INSERT INTO akte(PersNr, Datum, "Position", Gehalt)
+VALUES (7, '2009-01-01', 'Praktikant',		0);
+INSERT INTO akte(PersNr, Datum, "Position", Gehalt)
+VALUES (8, '2008-01-01', 'Tüftler',		2000);
+INSERT INTO akte(PersNr, Datum, "Position", Gehalt)
+VALUES (8, '2008-06-01', 'Erfinder',		3000);
+INSERT INTO akte(PersNr, Datum, "Position", Gehalt)
+VALUES (8, '2009-04-01', 'Cheferfinder',	5000);
+INSERT INTO akte(PersNr, Datum, "Position", Gehalt)
+VALUES (10, '2008-01-01', 'Hilfsbuchhalter',	50);
+INSERT INTO akte(PersNr, Datum, "Position", Gehalt)
+VALUES (94, '1982-03-01', 'Schuhputzer',	50);
+INSERT INTO akte(PersNr, Datum, "Position", Gehalt)
+VALUES (94, '1982-09-01', 'Tellerwäscher',	100);
+INSERT INTO akte(PersNr, Datum, "Position", Gehalt)
+VALUES (94, '1983-05-01', 'Tellerstapler',	200);
+INSERT INTO akte(PersNr, Datum, "Position", Gehalt)
+VALUES (94, '1988-05-01', 'Küchenchef',	1000);
+INSERT INTO akte(PersNr, Datum, "Position", Gehalt)
+VALUES (94, '1999-05-01', 'Abteilungsleiter',	3000);
+INSERT INTO akte(PersNr, Datum, "Position", Gehalt)
+VALUES (94, '2008-05-01', 'Hauptabteilungsleiter', 7000);
+INSERT INTO akte(PersNr, Datum, "Position", Gehalt)
+VALUES (91, '1997-05-01', 'Angestellter',	1000);
+INSERT INTO akte(PersNr, Datum, "Position", Gehalt)
+VALUES (91, '2007-05-01', 'Abteilungsleiter',	2000);
+INSERT INTO akte(PersNr, Datum, "Position", Gehalt)
+VALUES (71, '2002-01-01', 'Junior Berater',	1000);
+INSERT INTO akte(PersNr, Datum, "Position", Gehalt)
+VALUES (71, '2003-04-01', 'Berater',		2000);
+INSERT INTO akte(PersNr, Datum, "Position", Gehalt)
+VALUES (71, '2008-04-01', 'Senior Berater',	3000);
+INSERT INTO akte(PersNr, Datum, "Position", Gehalt)
+VALUES (21, '2001-01-01', 'Junior Berater',	800);
+INSERT INTO akte(PersNr, Datum, "Position", Gehalt)
+VALUES (21, '2002-04-01', 'Berater',		1200);
+INSERT INTO akte(PersNr, Datum, "Position", Gehalt)
+VALUES (21, '2007-04-01', 'Senior Berater',	2000);
+INSERT INTO akte(PersNr, Datum, "Position", Gehalt)
+VALUES (90, '2008-01-01', 'Angestellter',	2000);
+INSERT INTO akte(PersNr, Datum, "Position", Gehalt)
+VALUES (91, '2003-01-01', 'Praktikant',	        20);
+INSERT INTO akte(PersNr, Datum, "Position", Gehalt)
+VALUES (91, '2003-05-01', 'Angestellter',	2000);
+INSERT INTO akte(PersNr, Datum, "Position", Gehalt)
+VALUES (93, '2003-05-01', 'Angestellter',	2000);
+INSERT INTO akte(PersNr, Datum, "Position", Gehalt)
+VALUES (94, '2004-01-01', 'Angestellter',	2000);
+INSERT INTO akte(PersNr, Datum, "Position", Gehalt)
+VALUES (81, '2008-01-01', 'Berater',	1500);
+INSERT INTO akte(PersNr, Datum, "Position", Gehalt)
+VALUES (82, '2008-01-01', 'Berater',	1500);
+INSERT INTO akte(PersNr, Datum, "Position", Gehalt)
+VALUES (84, '2008-01-01', 'Berater',	1500);
+INSERT INTO akte(PersNr, Datum, "Position", Gehalt)
+VALUES (84, '2009-01-01', 'Berater',	2000);
