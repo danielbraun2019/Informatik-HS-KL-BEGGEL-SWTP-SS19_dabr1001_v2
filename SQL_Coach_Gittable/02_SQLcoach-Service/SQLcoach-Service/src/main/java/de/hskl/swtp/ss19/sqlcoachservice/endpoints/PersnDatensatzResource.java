@@ -64,8 +64,8 @@ public class PersnDatensatzResource {
     @Path("/execute")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public List<QueryReturn> executeQuery(@QueryParam("query") String query) {
-        return (sqlCoachDBFacetTraining.executeQuery(query));
+    public List<QueryReturn> selectQuery(@QueryParam("query") String query) {
+        return (sqlCoachDBFacetTraining.selectQuery(query));
 
     }
 }
