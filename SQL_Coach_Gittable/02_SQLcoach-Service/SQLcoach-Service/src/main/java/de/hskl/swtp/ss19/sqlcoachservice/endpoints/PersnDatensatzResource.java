@@ -66,7 +66,6 @@ public class PersnDatensatzResource {
     @Produces(MediaType.APPLICATION_JSON)
     public List<QueryReturn> selectQuery(@QueryParam("query") String query) {
         return (sqlCoachDBFacetTraining.selectQuery(query));
-
     }
     @POST
     @Path("/execute")
@@ -74,6 +73,14 @@ public class PersnDatensatzResource {
     @Produces(MediaType.APPLICATION_JSON)
     public List<QueryReturn> insertQuery(@QueryParam("query") String query) {
         return (sqlCoachDBFacetTraining.insertQuery(query));
+    }
+    @DELETE
+    @Path("/execute")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<QueryReturn> deleteQuery(@QueryParam("query") String query) {
+        return (sqlCoachDBFacetTraining.deleteQuery(query));
 
     }
+
 }

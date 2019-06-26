@@ -608,10 +608,23 @@ public class SqlCoachDBFacet {
             String[] s =Query.split(" ");
             System.out.println(s[2]);
             StringBuilder sb = new StringBuilder();
-            executeQueryforInsert_and_Update(Query);
+            executeQueryforInsert_Delete_and_Update(Query);
             sb.append("select*from ");
             sb.append(s[2]);
 
+            return(executeQuery(sb.toString()));
+        }
+        List<QueryReturn> query_return = new ArrayList<>();
+        return (query_return);
+    }
+    public List<QueryReturn> deleteQuery(String Query) {
+        if (Query.startsWith("delete")) {
+            String[] s =Query.split(" ");
+            System.out.println(s[2]);
+            StringBuilder sb = new StringBuilder();
+            executeQueryforInsert_Delete_and_Update(Query);
+            sb.append("select*from ");
+            sb.append(s[2]);
             return(executeQuery(sb.toString()));
         }
         List<QueryReturn> query_return = new ArrayList<>();
@@ -645,7 +658,7 @@ public class SqlCoachDBFacet {
         return (query_return);
     }
 
-    private void executeQueryforInsert_and_Update(String Query) {
+    private void executeQueryforInsert_Delete_and_Update(String Query) {
         List<QueryReturn> query_return = new ArrayList<>();
         try (Connection connection = getConnection()) {
             PreparedStatement pstmt = (PreparedStatement) connection.prepareStatement(Query, Statement.RETURN_GENERATED_KEYS);
