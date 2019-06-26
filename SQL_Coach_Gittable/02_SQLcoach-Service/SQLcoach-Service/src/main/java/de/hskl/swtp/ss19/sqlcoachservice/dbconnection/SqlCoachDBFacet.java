@@ -600,37 +600,39 @@ public class SqlCoachDBFacet {
     /* Methode erlaubt das audführen von SQL insert queries
     Mit Postman prüfbar:
     http://localhost:8001/sqlcoachservice/api/v1/dataset/1/execute?query=insert into personal  (PersNr, VNAME, NName, ProjNr, TelefonNr, Gehalt)
-    VALUES (123, 'Donald',	'TRUMP',	5, 1201, 1000)
-     */
+    VALUES (666, 'Donald',	'TRUMP',	5, 1201, 1000)
+    */
 
     public List<QueryReturn> insertQuery(String Query) {
         if (Query.startsWith("insert")) {
-            String[] s =Query.split(" ");
-            System.out.println(s[2]);
-            StringBuilder sb = new StringBuilder();
             executeQueryforInsert_Delete_and_Update(Query);
-            sb.append("select*from ");
-            sb.append(s[2]);
-
-            return(executeQuery(sb.toString()));
+            return(returnColumn(Query));
         }
         List<QueryReturn> query_return = new ArrayList<>();
         return (query_return);
     }
+
+    /* Methode erlaubt das audführen von SQL insert queries
+    Mit Postman prüfbar:
+    http://localhost:8001/sqlcoachservice/api/v1/dataset/1/execute?query=delete from personal where  persnr= 666
+    */
+
+
     public List<QueryReturn> deleteQuery(String Query) {
         if (Query.startsWith("delete")) {
-            String[] s =Query.split(" ");
-            System.out.println(s[2]);
-            StringBuilder sb = new StringBuilder();
             executeQueryforInsert_Delete_and_Update(Query);
-            sb.append("select*from ");
-            sb.append(s[2]);
-            return(executeQuery(sb.toString()));
+           return(returnColumn(Query));
         }
         List<QueryReturn> query_return = new ArrayList<>();
         return (query_return);
     }
-
+    private List<QueryReturn> returnColumn(String Query) {
+        String[] s =Query.split(" ");
+        StringBuilder sb = new StringBuilder();
+        sb.append("select*from ");
+        sb.append(s[2]);
+        return(executeQuery(sb.toString()));
+    }
     private List<QueryReturn> executeQuery(String Query) {
         List<QueryReturn> query_return = new ArrayList<>();
         try (Connection connection = getConnection()) {
@@ -665,13 +667,13 @@ public class SqlCoachDBFacet {
             int affectedRows = pstmt.executeUpdate();
 
             if (affectedRows == 0) {
-                throw new SQLException("Creating user failed, no rows affected.");
+                throw new SQLException("Query Execution Failed 0 Rows affected");
             }
         }
         catch (SQLException exce)
         {
             exce.printStackTrace();
-            throw new SqlCoachServiceException("ERROR addExercise", exce);
+            throw new SqlCoachServiceException("", exce);
         }
     }
 }
