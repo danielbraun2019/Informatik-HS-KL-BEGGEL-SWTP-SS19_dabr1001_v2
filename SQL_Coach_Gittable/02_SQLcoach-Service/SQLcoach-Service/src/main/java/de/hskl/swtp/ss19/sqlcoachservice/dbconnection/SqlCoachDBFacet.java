@@ -605,7 +605,7 @@ public class SqlCoachDBFacet {
      * Ein QueryReturn enthält Spaltennamen und Werte  der Selektierten Daten
      */
     public List<QueryReturn> selectQuery(String Query) {
-        if (Query.startsWith("select")) {
+        if (Query.startsWith("select")||Query.startsWith("Select")||Query.startsWith("SELECT")) {
             return(executeQuery(Query));
         }
         List<QueryReturn> query_return = new ArrayList<>();
@@ -621,7 +621,7 @@ public class SqlCoachDBFacet {
     */
 
     public List<QueryReturn> insertQuery(String Query) {
-        if (Query.startsWith("insert")) {
+        if (Query.startsWith("insert")||Query.startsWith("Insert")||Query.startsWith("INSERT")) {
             executeQueryforInsert_Delete_and_Update(Query);
             return(returnColumn(Query));
         }
@@ -636,7 +636,7 @@ public class SqlCoachDBFacet {
 
 
     public List<QueryReturn> deleteQuery(String Query) {
-        if (Query.startsWith("delete")) {
+        if (Query.startsWith("delete")||Query.startsWith("Delete")||Query.startsWith("DELETE")) {
             executeQueryforInsert_Delete_and_Update(Query);
            return(returnColumn(Query));
         }
