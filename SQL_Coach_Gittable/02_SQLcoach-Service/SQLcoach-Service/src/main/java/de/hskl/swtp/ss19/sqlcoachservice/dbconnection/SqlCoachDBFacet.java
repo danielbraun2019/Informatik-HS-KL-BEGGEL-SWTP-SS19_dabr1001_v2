@@ -19,7 +19,7 @@ import java.util.List;
  * Diese Klasse verwendet eine Postgres Datenbank um Szenarien, Gruppen und Aufgaben aus der Datenbank zu lesen,
  * bzw. diese in die Datenbank zu schreiben.
  *
- * @author Bastian Beggel, Johannes Schmitt
+ * @author Bastian Beggel, Johannes Schmitt, Braun Daniel
  */
 public class SqlCoachDBFacet {
 
@@ -513,6 +513,16 @@ public class SqlCoachDBFacet {
 
 
     }
+
+    /**
+     *
+     * @return Die Tabellenshemata in Form von Jsons, welche auf dem Objekt Table_shemas beruhen
+     * Ein Table_shema enthält
+     *     Den Namen der Tabelle            private String tableName;
+     *     Eine Liste der Spaltennamen       private List<String> column_names;
+     *     Eine Liste der Primary Keys       private List<String> primary_key;
+     *     Eine Liste der Foreign Keys       private List<String> foreign_key;
+     */
     public List<Table_shemas> getTableShemas() {
         List<Table_shemas> table_shemas = new ArrayList<>();
         List<String> tablenames = getTableNames();
@@ -587,6 +597,13 @@ public class SqlCoachDBFacet {
 
 
 /////////////////////////////////////////////////////////
+
+    /**
+     *
+     * @param Query Übergebene Query
+     * @return Liste von QueryReturn(s)
+     * Ein QueryReturn enthält Spaltennamen und Werte  der Selektierten Daten
+     */
     public List<QueryReturn> selectQuery(String Query) {
         if (Query.startsWith("select")) {
             return(executeQuery(Query));
@@ -597,7 +614,7 @@ public class SqlCoachDBFacet {
 
 
 
-    /* Methode erlaubt das audführen von SQL insert queries
+    /* Methode die das Ausführen von SQL insert queries auf dem Datensatz personaldatensatz ermöglicht
     Mit Postman prüfbar:
     http://localhost:8001/sqlcoachservice/api/v1/dataset/1/execute?query=insert into personal  (PersNr, VNAME, NName, ProjNr, TelefonNr, Gehalt)
     VALUES (666, 'Donald',	'TRUMP',	5, 1201, 1000)
@@ -612,7 +629,7 @@ public class SqlCoachDBFacet {
         return (query_return);
     }
 
-    /* Methode erlaubt das audführen von SQL insert queries
+    /* Methode die das Ausführen von SQL delete queries auf dem Datensatz personaldatensatz Ermöglicht
     Mit Postman prüfbar:
     http://localhost:8001/sqlcoachservice/api/v1/dataset/1/execute?query=delete from personal where  persnr= 666
     */
@@ -626,6 +643,16 @@ public class SqlCoachDBFacet {
         List<QueryReturn> query_return = new ArrayList<>();
         return (query_return);
     }
+
+
+    /*
+    Die Methode returnColumn gibt die Werte einer Spalte auf der Insert oder delete queries ausgeführt werden aus.
+    Mit
+    String[] s =Query.split(" ");
+    StringBuilder sb = new StringBuilder();
+    Wird die Query in ein Array umgewandelt wobei der Name der durch die Query zu veränderten Spalte an Position 2 des Array steht
+    Zurückgegeben werden Alle Werte der Spalte als QueryReturn
+     */
     private List<QueryReturn> returnColumn(String Query) {
         String[] s =Query.split(" ");
         StringBuilder sb = new StringBuilder();
@@ -633,6 +660,10 @@ public class SqlCoachDBFacet {
         sb.append(s[2]);
         return(executeQuery(sb.toString()));
     }
+
+    /**
+     Executes Queries  via executeQuery()
+     */
     private List<QueryReturn> executeQuery(String Query) {
         List<QueryReturn> query_return = new ArrayList<>();
         try (Connection connection = getConnection()) {
@@ -660,6 +691,9 @@ public class SqlCoachDBFacet {
         return (query_return);
     }
 
+    /**
+    Executes Queries  via executeUpdate()
+     */
     private void executeQueryforInsert_Delete_and_Update(String Query) {
         List<QueryReturn> query_return = new ArrayList<>();
         try (Connection connection = getConnection()) {
