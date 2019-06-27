@@ -231,6 +231,7 @@ public class SqlCoachDBFacet {
 
     /**
      * Methode zum Speichern von Gruppen.
+     * Ein SQL-Statement wird vorbereitet, erzeugt und ausgeführt.
      * @param group die zu Speichernde Gruppe
      * @return die gespeicherte Gruppe
      */
@@ -282,6 +283,7 @@ public class SqlCoachDBFacet {
 
     /**
      * Methode zum Speichern von Aufgaben.
+     * Ein SQL-Statement wird vorbereitet, erzeugt und ausgeführt.
      * @param exercise die zu Speichernde Aufgabe
      * @return die gespeicherte Aufgabe.
      */
@@ -332,7 +334,11 @@ public class SqlCoachDBFacet {
         return exercise;
     }
 
-
+    /**
+     * Methode zum Updaten von Szenarien
+     *  Ein SQL-Statement wird vorbereitet, erzeugt und ausgeführt.
+     * @param sc Ein Szenario, welche das upgedatete Szenario darstellt
+     */
     public void updateScenario(Scenario sc) {
         StringBuilder sb = new StringBuilder();
         sb.append("UPDATE ");
@@ -371,7 +377,11 @@ public class SqlCoachDBFacet {
 
 
     }
-
+    /**
+     * Methode zum Updaten von Gruppen
+     *  Ein SQL-Statement wird vorbereitet, erzeugt und ausgeführt.
+     * @param sc Eine Gruppe, welche das upgedatete Szenario darstellt
+     */
     public void updateGroup(Group gp) {
         StringBuilder sb = new StringBuilder();
         sb.append("UPDATE ");
@@ -404,6 +414,11 @@ public class SqlCoachDBFacet {
 
 
     }
+    /**
+     * Methode zum Updaten von Aufgaben
+     *  Ein SQL-Statement wird vorbereitet, erzeugt und ausgeführt.
+     * @param sc Eine Aufgabe, welche das upgedatete Szenario darstellt
+     */
     public void updateExercise(Exercise e) {
         StringBuilder sb = new StringBuilder();
         sb.append("UPDATE ");
@@ -436,6 +451,11 @@ public class SqlCoachDBFacet {
         }
     }
 
+    /**
+     *Methode zum Löschen von Szenarien
+     *  Ein SQL-Statement wird vorbereitet, erzeugt und ausgeführt.
+     * @param scenarioId die Id des zu löschenden Szenarios
+     */
     public void deleteScenario(int scenarioId) {
         StringBuilder sb = new StringBuilder();
         sb.append("DELETE FROM");
@@ -459,7 +479,11 @@ public class SqlCoachDBFacet {
             throw new SqlCoachServiceException("ERROR deleteDATA", exce);
         }
     }
-
+    /**
+     *Methode zum Löschen von Gruppen
+     *  Ein SQL-Statement wird vorbereitet, erzeugt und ausgeführt.
+     * @param groupId die Id der zu löschenden Gruppe
+     */
     public void deleteGroup(int scenarioId, int groupId) {
         StringBuilder sb = new StringBuilder();
         sb.append("DELETE FROM");
@@ -486,6 +510,11 @@ public class SqlCoachDBFacet {
             throw new SqlCoachServiceException("ERROR deleteDATA", exce);
         }
     }
+    /**
+     *Methode zum Löschen von Aufgabe
+     *  Ein SQL-Statement wird vorbereitet, erzeugt und ausgeführt.
+     * @param groupId die Id der zu löschenden Aufgabe
+     */
     public void deleteExercise(int groupId, int exerciseId) {
         StringBuilder sb = new StringBuilder();
         sb.append("DELETE FROM");
@@ -516,7 +545,7 @@ public class SqlCoachDBFacet {
 
     /**
      *
-     * @return Die Tabellenshemata in Form von Jsons, welche auf dem Objekt Table_shemas beruhen
+     * @return Eine Liste  von Tabellenshemata , welche auf dem Objekt Table_shemas beruhen (wird von PersnDatensatzRessource ni Json umgewandelt)
      * Ein Table_shema enthält
      *     Den Namen der Tabelle            private String tableName;
      *     Eine Liste der Spaltennamen       private List<String> column_names;
@@ -536,6 +565,11 @@ public class SqlCoachDBFacet {
         }
         return (table_shemas);
     }
+
+    /**
+     *
+     * @return eine Liste der Tabellennamen
+     */
     private  List<String> getTableNames(){
         List<String> table_names = new ArrayList<>();
         try (Connection connection = getConnection()) {
@@ -551,6 +585,12 @@ public class SqlCoachDBFacet {
         }
         return (table_names);
     }
+
+    /**
+     *
+     * @param table_name Namen der Tabelle
+     * @return Namen der Spalten der Tabelle mit dem durch table_name übergebenen Namen
+     */
     private List<String> getColumnNames(String table_name) {
         List<String> ListOfColumnNames = new ArrayList<>();
         try (Connection connection = getConnection()) {
@@ -565,6 +605,10 @@ public class SqlCoachDBFacet {
         }
         return (ListOfColumnNames);
     }
+
+    /**
+     * @return Eine Liste von Strings der Primärschküssel der Tabelle mit Namen entsprechend des Übergabeparameters
+     */
     private List<String> getPrimaryKey(String tablename) {
         List<String> primary_keys=new ArrayList<>();
         try (Connection connection = getConnection()) {
@@ -579,6 +623,9 @@ public class SqlCoachDBFacet {
         }
         return (primary_keys);
     }
+    /**
+     * @return Eine Liste von Strings der Fremdschlüsseln der Tabelle mit Namen entsprechend des Übergabeparameters
+     */
     private List<String> getForeignKeys(String tablename) {
         List<String> ListOfForeignKeys = new ArrayList<>();
         try (Connection connection = getConnection()) {
